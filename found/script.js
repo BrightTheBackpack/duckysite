@@ -1,45 +1,44 @@
+const dropdown = document.getElementById('ducks');
+const submit = document.getElementById('submit');
+const name = document.getElementById('name');
+const nulloption = document.createElement('option');
+nulloption.value = '';
+nulloption.textContent = 'Select a duck';
+dropdown.appendChild(nulloption);
 
-// const input = document.getElementById('fileinput');
+fetch('https://duckysite.vercel.app/notfound')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        for(const id in data) {
+            const ducky = data[id];
+            console.log(ducky)
+            const option = document.createElement('option');
+            option.value = id;
+            option.textContent = ducky.description;
+            dropdown.appendChild(option);
+        }
+    });
 
-// const upload = async (file) => {
-//   const formData = new FormData();
-//   formData.append('file', file); // Adjust 'file' if the API expects a different field name
-//     const dataURL = await fileToDataURL(file);
+submit.addEventListener('click', () => {
+    const id = dropdown.value;
+    const duckyName = name.value;
 
-//   try {
-//     const response = await fetch('https://cdn.hackclub.com/api/v3/new', {
-//       method: 'POST',
-//       headers: {
-//         'Authorization': 'Bearer beans'
-//       },
-//       body: JSON.stringify([dataURL]) // assuming API accepts an array of strings
-//     });
-
-//     const result = await response.json();
-//     console.log('Upload successful:', result);
-//   } catch (error) {
-//     console.error('Upload failed:', error);
-//   }
-// };
-
-
-
-// const onSelectFile = () => {
-//     console.log('uploading')
-//     console.log(input.files[0]);
-//     upload(input.files[0]);
-    
-// };
-// const fileToDataURL = (file) => {
-//   return new Promise((resolve, reject) => {
-//     const reader = new FileReader();
-//     reader.onload = () => resolve(reader.result); // reader.result is the data URL
-//     reader.onerror = reject;
-//     reader.readAsDataURL(file);
-//   });
-// };
-
-// input.addEventListener('change', onSelectFile, false);
-
-
-
+    if (id && duckyName) {
+        fetch(`https://duckysite.vercel.app/updatestate?id=${id}&status=true&name=${duckyName}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Duck state updated successfully!');
+                } else {
+                    alert('Failed to update duck state.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while updating the duck state.');
+            });
+    } else {
+        alert('Please select a duck and enter a name.');
+    }
+});

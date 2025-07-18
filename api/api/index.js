@@ -6,6 +6,7 @@ const getDatabase = require('firebase/database').getDatabase;
 const ref = require('firebase/database').ref;
 const get = require('firebase/database').get;
 const set = require('firebase/database').set;
+const update = require('firebase/database').update;
 const firebaseConfig = {
     apiKey: process.env.FIREBASE_KEY,
     authDomain: process.env.FIREBASE_AUTH_DOMAIN,
@@ -42,7 +43,7 @@ app.get('/notfound', (req, res) => {
 app.get('/updatestate', (req, res) => {
     const { id, status, name } = req.query;
     const databaseref = ref(database, `ducks/${id}`);
-    set(databaseref, { status, name }).then(() => {
+    update(databaseref, { status, name }).then(() => {
         res.send({ success: true });
     }).catch((error) => {
         res.status(500).send({ error: error.message });
