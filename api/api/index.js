@@ -31,6 +31,23 @@ app.get('/', (req, res) => {
 
     })
 });
+app.get('/notfound', (req, res) => {
+    const databaseref = ref(database, 'ducks');
+    const snapshot =  get(databaseref).then((snapshot) => {
+        const data = snapshot.val();
+        const notFound = Object.values(data).filter(ducky => !ducky.status);
+        res.send(notFound);
+    });
+});
+app.get('/updatestate', (req, res) => {
+    const { id, status, name } = req.query;
+    const databaseref = ref(database, `ducks/${id}`);
+    set(databaseref, { status, name }).then(() => {
+        res.send({ success: true });
+    }).catch((error) => {
+        res.status(500).send({ error: error.message });
+    });
+});
 
 app.listen(port, () => {
     console.log('listening!');

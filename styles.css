@@ -1,5 +1,7 @@
 
-
+body{
+    cursor: url('cursor.png'), auto;
+}
 .rounded-button{
     border-radius: 4px;
     outline: none;
@@ -24,10 +26,15 @@
   align-items: center;
 }
 .title {
+    position: relative;
+
   font-size: 3rem;
   color: white;
   text-align: center;
   margin-top: 20px;
+  animation-name: bounce;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
 }
 .subtitle {
   font-size: 1.5rem;
@@ -55,4 +62,15 @@ a{
     margin: 0 auto;
     display: block;
 
+}
+@keyframes bounce {
+    0% {
+        top: 0px;
+    }
+    50% {
+        top: -10px;
+    }
+    100% {
+        top: 0px;
+    }
 }
