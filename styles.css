@@ -31,10 +31,11 @@ body{
   font-size: 3rem;
   color: white;
   text-align: center;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   animation-name: bounce;
   animation-duration: 2s;
   animation-iteration-count: infinite;
+  margin: 0;
 }
 .subtitle {
   font-size: 1.5rem;

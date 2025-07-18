@@ -1,0 +1,10 @@
+.rounded-button{
+    border-radius: 4px;
+    outline: none;
+    color: white;
+    font-weight: bold;
+    background-color: #800080;
+    text-align: center;
+    font-family: "Pixelify Sans", sans-serif;
+    height: 40px;
+}

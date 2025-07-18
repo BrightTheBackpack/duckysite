@@ -49,7 +49,16 @@ app.get('/updatestate', (req, res) => {
         res.status(500).send({ error: error.message });
     });
 });
-
+app.get('/foundcount', (req, res) => {
+    const databaseref = ref(database, 'ducks');
+    get(databaseref).then((snapshot) => {
+        const data = snapshot.val();
+        const foundCount = Object.values(data).filter(ducky => ducky.status).length;
+        res.send({ foundCount });
+    }).catch((error) => {
+        res.status(500).send({ error: error.message });
+    });
+});
 app.listen(port, () => {
     console.log('listening!');
 });
