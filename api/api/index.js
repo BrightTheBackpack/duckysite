@@ -13,7 +13,7 @@ const firebaseConfig = {
 }
 
 const firebaseApp = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const analytics = getAnalytics(firebaseApp);
 const app = express()
 const port = 3000;
 
