@@ -1,5 +1,9 @@
 const express = require('express');
 const initializeApp = require('firebase/app').initializeApp;
+const getDatabase = require('firebase/database').getDatabase;
+const ref = require('firebase/database').ref;
+const get = require('firebase/database').get;
+const set = require('firebase/database').set;
 const firebaseConfig = {
     apiKey: process.env.FIREBASE_KEY,
     authDomain: process.env.FIREBASE_AUTH_DOMAIN,
@@ -14,9 +18,15 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const app = express()
 const port = 3000;
+const database = getDatabase(firebaseApp);
+
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    const databaseref = ref(database, '');
+    const snapshot =  get(databaseref).then((snapshot) => {
+        res.send(snapshot.val())
+
+    })
 });
 
 app.listen(port, () => {
