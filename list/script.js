@@ -9,9 +9,8 @@ fetch('https://duckysite.vercel.app/')
             .then(response => response.json())
             .then(countData => {
                 const foundCount = countData.foundCount;
-                const countElement = document.createElement('h2');
-                countElement.textContent = `Found Ducks: ${foundCount}`;
-                list.appendChild(countElement);
+                const countElement = document.getElementById('found');
+                countElement.textContent = `Found Ducks: ${foundCount}/30`;
             })
             .catch(error => {
                 console.error('Error fetching found count:', error);
