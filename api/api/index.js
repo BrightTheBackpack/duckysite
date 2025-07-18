@@ -1,4 +1,6 @@
 const express = require('express');
+const cors = require('cors');
+
 const initializeApp = require('firebase/app').initializeApp;
 const getDatabase = require('firebase/database').getDatabase;
 const ref = require('firebase/database').ref;
@@ -17,6 +19,7 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 const app = express()
+app.use(cors())
 const port = 3000;
 const database = getDatabase(firebaseApp);
 
