@@ -1,6 +1,6 @@
 const express = require('express');
 const initializeApp = require('firebase/app').initializeApp;
-
+const getAnalytics = require('firebase/analytics').getAnalytics;
 const firebaseConfig = {
     apiKey: process.env.FIREBASE_KEY,
     authDomain: process.env.FIREBASE_AUTH_DOMAIN,
