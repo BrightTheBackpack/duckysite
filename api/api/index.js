@@ -22,7 +22,7 @@ const database = getDatabase(firebaseApp);
 
 
 app.get('/', (req, res) => {
-    const databaseref = ref(database, '');
+    const databaseref = ref(database, 'ducks');
     const snapshot =  get(databaseref).then((snapshot) => {
         res.send(snapshot.val())
 
