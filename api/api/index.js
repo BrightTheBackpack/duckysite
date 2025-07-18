@@ -11,6 +11,9 @@ const firebaseConfig = {
     appId: process.env.FIREBASE_APP_ID,
     measurementId: process.env.FIREBASE_MEASUREMENT_ID
 }
+
+const firebaseApp = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 const app = express()
 const port = 3000;
 
